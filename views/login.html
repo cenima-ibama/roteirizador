@@ -1,0 +1,26 @@
+<div class="container" style="width: 60em; margin-top: 5em;"  >
+    <h3>LogIn</h3>
+    <div ng-controller ="LoginCtrl">
+        <form ng-submit="login(username, password)" class="ng-scope ng-pristine ng-valid">
+            <div>
+                <div class="pull-left" style="width: 30em;" >
+                    <br/>
+                    <label>Login:&nbsp;</label>
+                    <input type="text" ng-model="username" class="ng-pristine ng-valid"></br>
+                    <label>Senha:</label>
+                    <input type="password" ng-model="password" class="ng-pristine ng-valid">
+                    <br/>
+                    {{loginError}}  {{loggedUser}}
+                    <br/><br/>
+                    <button class="btn btn-success" ng-click="">Submit</button>
+                    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                </div>
+                <div class="pull-left" style="width: 20em; vertical-align: top; ">
+                    
+                    <h4>Acesso Restrito</h4>
+                    <p>O acesso a essa sessão é permitida somente a usuários registrados no sistema Ibama-Net.</p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
