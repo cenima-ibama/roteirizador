@@ -1,39 +1,3 @@
-var app = angular.module('app', ['ngRoute', 'leaflet-directive']);
-
-app.config(function ($routeProvider) {
-
-    //configure Route Provider
-    $routeProvider.
-            when('/', {
-                templateUrl: 'views/login.html',
-                controller: LoginCtrl
-            }).
-            when('/main', {
-                templateUrl: 'views/main.html',
-                controller: mapController
-            }).
-            when('/map', {
-                controller: mapController,
-                templateUrl: 'views/map.html'
-            }).
-            when('/login', {
-                controller: LoginCtrl,
-                templateUrl: 'views/login.html'
-            }).
-            when('/logout', {
-                controller: LoginCtrl,
-            }).
-            when('/rota', {
-                controller: MapCtrl,
-                templateUrl: 'views/rota.html'
-
-            })
-            .
-            otherwise({
-                redirectTo: '/'
-            });
-});
-
 app.directive('sap', function () {
     return {
         restrict: 'E',
@@ -43,7 +7,7 @@ app.directive('sap', function () {
 
             var map = L.map(attrs.id, {
                 center: [-15.810527, -47.894107],
-                zoom: 13
+                zoom: 5
             });
 
             L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

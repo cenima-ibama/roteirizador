@@ -1,7 +1,7 @@
 app.run(function (authentication, $rootScope, $location) {
     $rootScope.$on('$routeChangeStart', function (evt) {
         if (!authentication.isAuthenticated) {
-            $location.url("/login");
+            $location.url("/rota");
         }
         evt.preventDefault();
     });
@@ -39,7 +39,7 @@ function LoginCtrl($scope, $http, $location, authentication, $routeParams, $root
                         $location.url("/rota");
                     } else {
                         $scope.loginError = "Usuario ou senha invalidos!";
-                        $location.url("/login");
+                        $location.url("/rota");
                     }
                     ;
 
@@ -57,7 +57,7 @@ function LoginCtrl($scope, $http, $location, authentication, $routeParams, $root
         authentication.isAuthenticated = false;
         $rootScope.loggedIn = 'false';
         console.log($scope.loggedIn);
-        $location.url("/login");
+        $location.url("/rota");
     }
 
 
