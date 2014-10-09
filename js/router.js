@@ -18,8 +18,8 @@ app.directive('sap', function () {
 
             map.on('click', function (e) {
 
-                if (arrayPoints.length < 2) 
-                    arrayPoints.push(e.latlng);            
+                if (arrayPoints.length < 2)
+                    arrayPoints.push(e.latlng);
 
                 if (arrayPoints.length == 1)
                 {
