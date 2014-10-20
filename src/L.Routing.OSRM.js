@@ -188,6 +188,7 @@
                 array.push([lat * precision, lng * precision]);
             }
             return array;
+            console.log($array);
         },
         _convertSummary: function (osrmSummary) {
             return {
