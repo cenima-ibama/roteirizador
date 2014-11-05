@@ -10,7 +10,8 @@
             autoRoute: true,
             routeWhileDragging: false,
             routeDragInterval: 500,
-            waypointMode: 'connect'
+            waypointMode: 'connect',
+            //coordinates: 'teste'
         },
         initialize: function (options) {
             L.Util.setOptions(this, options);
@@ -149,6 +150,8 @@
                             this._routeSelected({route: routes[0]});
                         }
                     }
+                    //this.options.coordinates = this._routes[0].coordinates;
+                    //console.log(this._routes[0].coordinates);
                 }, this, options);
             }
         },
@@ -162,5 +165,6 @@
 
     L.Routing.control = function (options) {
         return new L.Routing.Control(options);
+        
     };
 })();
