@@ -28,6 +28,7 @@
                 containerClassName: this.options.itineraryClassName
             });
         },
+
         onAdd: function () {
             this._container = L.DomUtil.create('div', 'leaflet-routing-container leaflet-bar ' +
                     (!this.options.show ? 'leaflet-routing-container-hide' : '') +
