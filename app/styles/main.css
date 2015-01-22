@@ -1,11 +1,14 @@
 /* Space out content a bit */
-.leaflet-routing-container, .route-info{
+#map {
+  height: 1200px;
+}
+
+.leaflet-routing-container, .route-info {
   background-color: #fff;
 }
 
 .route-info {
   padding-top: 0.8em;
-  height: 70px;
   float: top;
 }
 

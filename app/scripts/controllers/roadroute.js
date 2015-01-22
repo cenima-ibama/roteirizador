@@ -20,16 +20,25 @@ angular.module('routesClientApp')
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    var start_end = [];
-    var route = L.Routing.control({routeWhileDragging: false});
-    route.addTo(map);
+    $scope.startEnd = [];
+    $scope.markers = L.layerGroup();
+    $scope.markers.addTo(map);
 
     function onClick(e) {
-      if (start_end.length < 2) {
-        start_end.push(e.latlng);
-        route.setWaypoints(start_end);
+      if ($scope.startEnd.length < 2) {
+        $scope.startEnd.push(e.latlng);
+        L.marker(e.latlng).addTo($scope.markers);
+
+        if ($scope.startEnd.length === 2) {
+          map.removeLayer($scope.markers);
+          $scope.route = L.Routing.control({
+              waypoints: $scope.startEnd,
+              routeWhileDragging: true
+            });
+          $scope.route.addTo(map);
+        }
       }
     }
 
-    map.addEventListener('click', onClick);
+    map.on('click', onClick);
   });
