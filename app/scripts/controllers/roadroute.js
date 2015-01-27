@@ -15,6 +15,8 @@ angular.module('routesClientApp')
       'Karma'
     ];
 
+    L.Icon.Default.imagePath = 'images';
+
     var map = L.map('map').setView([-12, -52], 5);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
