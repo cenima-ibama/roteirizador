@@ -19,7 +19,7 @@ angular.module('routesClientApp')
 
       L.Icon.Default.imagePath = 'images';
 
-      var map = L.map('map').setView([-12, -52], 5);
+      var map = L.map('map').setView([-35, -58], 4);
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);

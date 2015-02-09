@@ -1,6 +1,7 @@
 /* Space out content a bit */
 #map {
   height: 1200px;
+  width: 100%;
 }
 
 .leaflet-routing-container, .route-info {
