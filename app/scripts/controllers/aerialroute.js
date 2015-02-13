@@ -9,8 +9,8 @@
  */
 
 angular.module('routesClientApp')
-  .controller('AerialRouteCtrl', ['$scope', 'AirportApi',
-    function ($scope, AirportApi) {
+  .controller('AerialRouteCtrl', ['$scope', 'RestApi',
+    function ($scope, RestApi) {
       $scope.awesomeThings = [
         'HTML5 Boilerplate',
         'AngularJS',
@@ -28,8 +28,8 @@ angular.module('routesClientApp')
       $scope.added_airports = [];
 
 
-      if (map.getZoom() > 7) {
-        AirportApi.query({name:$scope.origin, in_bbox:map.getBounds()}, function (data) {
+      // if (map.getZoom() > 7) {
+        RestApi.query({name:$scope.origin, type:'airports'}, function (data) {
           $scope.airports = L.geoJson(data, {
             pointToLayer: function(feature, latlng) {
               if (feature.id.indexOf($scope.added_airports) === -1) {
@@ -40,6 +40,6 @@ angular.module('routesClientApp')
           });
           $scope.airports.addTo(map);
         });
-      }
+      // }
     }
   ]);

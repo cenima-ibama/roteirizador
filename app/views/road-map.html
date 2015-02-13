@@ -1,4 +1,4 @@
-<div class="route-info">
+<div class="route-info" ng-hide="routeExists">
   <div class="col-md-10 col-sm-8">
     <div class="col-md-6 col-xs-12 route-info-itens">
       <div class="input-group input-group-lg">
@@ -15,8 +15,8 @@
   </div>
   <div class="col-md-2 col-sm-4 col-xs-12 route-info-buttons route-info-itens">
     <a href="" class="btn btn-primary">Gravar Rota</a>
-    <a href="" class="btn btn-warning" ng-click="clear_markers()">Limpar</a>
+    <a href="" class="btn btn-warning" ng-click="clearMarkers()">Limpar</a>
   </div>
 </div>
 
-<div resizable ng-style="{ width: windowWidth, height: windowHeight - 70 }" id="map"></div>
+<div resizable ng-style="{ width: windowWidth, height: if (routeExists) {windowHeight -70 } else {windowHeight - 70} }" id="map"></div>

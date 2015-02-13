@@ -23,7 +23,7 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/road-route', {
+      .when('/road-route/:authCode', {
         templateUrl: 'views/road-map.html',
         controller: 'RoadRouteCtrl'
       })
@@ -34,4 +34,13 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  .config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  }])
+  .config(['$sceDelegateProvider', function($sceDelegateProvider) {
+     $sceDelegateProvider.resourceUrlWhitelist(['self', 'http://localhost:8000/**', 'http://localhost:8000/**']);
+
+ }])
+  ;
