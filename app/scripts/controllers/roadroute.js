@@ -47,6 +47,32 @@ angular.module('routesClientApp')
             $scope.startEnd = [];
             $scope.route.setWaypoints($scope.startEnd);
           };
+
+          $scope.sendRoute = function() {
+            if ($scope.route._routes[0].coordinates) {
+              var coordinates = [];
+              for (var i=0; i < $scope.route._routes[0].coordinates.length; ++i) {
+                coordinates.push($scope.route._routes[0].coordinates[i].reverse());
+              }
+
+              RestApi.save({type:'road-routes'},
+                {
+                  'auth_code': $routeParams.authCode,
+                  'states': $routeParams.states,
+                  'geom':{
+                    'type': 'LineString',
+                    'coordinates': coordinates
+                  }
+                }
+              ,
+                function success(data) {alert('dados enviados com sucesso');},
+                function success(status) {alert(status);}
+              );
+            }
+            else {
+              alert('A rota ainda não foi traçada');
+            }
+          };
         });
     }
   ]);

@@ -19,9 +19,11 @@ angular.module('routesClientApp')
         },
         save: {
           method:'POST',
-          headers: {'Authorization':'Token 54a327ae2741a50d629a4fd390142e72426a7ad3'},
-          params:{authCode:'', format:'json'}
+          headers: {'Authorization':'Token 54a327ae2741a50d629a4fd390142e72426a7ad3',
+            'Content-Type': 'application/json'},
+          params:{authCode:''}
           },
-      }
+      },
+      {stripTrailingSlashes: false}
     );
   }]);

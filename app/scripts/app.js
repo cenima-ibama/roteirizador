@@ -27,6 +27,10 @@ angular
         templateUrl: 'views/road-map.html',
         controller: 'RoadRouteCtrl'
       })
+      .when('/road-route/:authCode/:states', {
+        templateUrl: 'views/road-map.html',
+        controller: 'RoadRouteCtrl'
+      })
       .when('/aerial-route', {
         templateUrl: 'views/aerial-map.html',
         controller: 'AerialRouteCtrl'
@@ -34,13 +38,4 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  })
-  .config(['$httpProvider', function ($httpProvider) {
-    $httpProvider.defaults.useXDomain = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
-  }])
-  .config(['$sceDelegateProvider', function($sceDelegateProvider) {
-     $sceDelegateProvider.resourceUrlWhitelist(['self', 'http://localhost:8000/**', 'http://localhost:8000/**']);
-
- }])
-  ;
+  });
