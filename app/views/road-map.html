@@ -1,22 +1,27 @@
 <div class="route-info" ng-hide="routeExists">
-  <div class="col-md-10 col-sm-8">
-    <div class="col-md-6 col-xs-12 route-info-itens">
-      <div class="input-group input-group-lg">
-        <span class="input-group-addon" id="sizing-addon1">Origem</span>
-        <input type="text" class="form-control" ng-model="origin" placeholder="Cidade de Origem" aria-describedby="sizing-addon1">
-      </div>
-    </div>
-    <div class="col-md-6 col-xs-12 route-info-itens">
-      <div class="input-group input-group-lg">
-        <span class="input-group-addon" id="sizing-addon1">Destino</span>
-        <input type="text" class="form-control" ng-model="destination" placeholder="Cidade de Destino" aria-describedby="sizing-addon1">
-      </div>
-    </div>
+    
+  <div class="alert alert-info alert-margin" role="alert">
+    <button class="close" data-dismiss="alert">x</button>
+    <p class="center">Selecione a rota</p>
   </div>
-  <div class="col-md-2 col-sm-4 col-xs-12 route-info-buttons route-info-itens">
-    <a href="" class="btn btn-primary" ng-click="sendRoute()">Gravar Rota</a>
-    <a href="" class="btn btn-warning" ng-click="clearMarkers()">Limpar</a>
-  </div>
+
+  <div data-ng-if="error" class="alert alert-danger alert-margin" role="alert">
+    <button class="close" data-dismiss="alert">x</button>
+    <p class="center">Rota não salva</p>
+  </div>  
+
+  <div data-ng-if="success" class="alert alert-success alert-margin" role="alert">
+    <button class="close" data-dismiss="alert">x</button>
+    <p class="center">Dados Enviados com sucesso</p>
+  </div>  
+
+    <div class="route-info-buttons route-info-itens">
+      <a class="btn btn-primary" ng-click="sendRoute()" 
+      tabindex="0" data-toggle="popover" id="popoverNoRoute" 
+      data-content="Traçar rota válida" 
+      data-placement="left">Gravar Rota <span class="glyphicon glyphicon-ok"></span></a>
+      <a class="btn btn-warning" ng-click="clearMarkers()">Limpar <span class="glyphicon glyphicon-erase"></span></a>
+    </div>
 </div>
 
-<div resizable ng-style="{ width: windowWidth, height: windowHeight - 70 }" id="map"></div>
+<div resizable ng-style="{ width: windowWidth, height: windowHeight}" id="map"></div>

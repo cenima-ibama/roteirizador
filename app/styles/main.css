@@ -4,22 +4,42 @@
   width: 100%;
 }
 
-.leaflet-routing-container, .route-info {
-  background-color: #fff;
-}
-
-.route-info {
-  padding-top: 0.8em;
-  float: top;
-}
-
-.route-info-buttons {
-  padding-top: 0.5em;
+p.center{
   text-align: center;
 }
 
-.route-info-itens {
-  padding-bottom: 0.8em;
+.route-info-buttons{
+  position: absolute;
+  z-index: 1;
+    margin-top: 4em;
+  right: 3%;
+}
+
+.alert-margin{
+  margin-bottom: 0 !important; 
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+ }
+
+ .leaflet-control-zoom{
+  margin-top: 4.8em !important;
+ }
+ 
+.leaflet-routing-container {
+  margin: 8em 3em 0 0  !important;
+  overflow-y: auto;
+  max-height: 40em;
+  min-width: 15em;
+}
+
+/*Leaflet Routin container padding to exhb*/
+.leaflet-routing-alt{
+  padding: 1em;
+}
+
+.leaflet-routing-container, .route-info {
+  background-color: #fff;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
