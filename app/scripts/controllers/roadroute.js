@@ -65,8 +65,12 @@ angular.module('routesClientApp')
                     'coordinates': coordinates
                   }
                 },
-                function success(data) {alert('dados enviados com sucesso');},
-                function success(status) {console.log(status);}
+                function success(data) {
+                  alert('Dados enviados com sucesso!');
+                },
+                function success(status) {
+                  alert('Não foi possível salvar a rota');
+                  }
               );
             }
             else {
