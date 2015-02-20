@@ -50,23 +50,23 @@ angular.module('routesClientApp')
 
           $scope.sendRoute = function() {
             if ($scope.route._routes[0].coordinates) {
-              var coordinates = [];
-              for (var i=0; i < $scope.route._routes[0].coordinates.length; ++i) {
-                coordinates.push($scope.route._routes[0].coordinates[i].reverse());
-              }
+              var coordinates = $scope.route._routes[0].coordinates.map(
+                function(coordinate) {
+                  return coordinate.reverse();
+                }
+              );
 
               RestApi.save({type:'road-routes'},
                 {
                   'auth_code': $routeParams.authCode,
-                  'states': $routeParams.states,
+                  'states': $routeParams.states.split(','),
                   'geom':{
                     'type': 'LineString',
                     'coordinates': coordinates
                   }
-                }
-              ,
+                },
                 function success(data) {alert('dados enviados com sucesso');},
-                function success(status) {alert(status);}
+                function success(status) {console.log(status);}
               );
             }
             else {
