@@ -49,12 +49,15 @@ angular.module('routesClientApp')
           };
 
           $scope.sendRoute = function() {
-            if ($scope.route._routes[0].coordinates) {
+            if ($scope.route._routes && $scope.route._routes[0].coordinates) {
               var coordinates = $scope.route._routes[0].coordinates.map(
                 function(coordinate) {
                   return coordinate.reverse();
                 }
               );
+
+              $scope.success = false;
+              $scope.error = false;
 
               RestApi.save({type:'road-routes'},
                 {
@@ -66,15 +69,15 @@ angular.module('routesClientApp')
                   }
                 },
                 function success(data) {
-                  alert('Dados enviados com sucesso!');
+                  $scope.success = true;
                 },
                 function success(status) {
-                  alert('Não foi possível salvar a rota');
-                  }
+                  $scope.error = true;
+                }
               );
             }
             else {
-              alert('A rota ainda não foi traçada');
+              $("#popoverNoRoute").popover('show');
             }
           };
         });
