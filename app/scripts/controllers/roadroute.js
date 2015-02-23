@@ -78,8 +78,8 @@ angular.module('routesClientApp')
                 },
                 function success(status) {
                   $scope.error = true;
-                  $scope.message = 'A rota não está dentro dos estados permitidos.' + 
-                    ' Trace novamente a rota.';
+                  $scope.message = 'A rota não está dentro dos estados permitidos.' +
+                    ' Trace novamente.';
                   $scope.class = 'danger'
                 }
               );
