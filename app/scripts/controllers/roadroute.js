@@ -16,6 +16,9 @@ angular.module('routesClientApp')
         'Karma'
       ];
 
+      $scope.message = '';
+      $scope.class = '';
+
       L.Icon.Default.imagePath = 'images';
       var map = L.map('map').setView([-35, -58], 4);
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -27,6 +30,8 @@ angular.module('routesClientApp')
           $scope.route = L.geoJson(data);
           $scope.route.addTo(map);
           $scope.routeExists = true;
+          $scope.message = 'Rota com código de autorização ' + $routeParams.authCode;
+          $scope.class = 'success'
         },
         function error(data) {
           $scope.startEnd = [];
@@ -34,6 +39,8 @@ angular.module('routesClientApp')
             routeWhileDragging: true
           });
           $scope.route.addTo(map);
+          $scope.message = 'Clique na cidade de origem e de destino para traçar a rota. Clique em Gravar para enviar a rota.';
+          $scope.class = 'info'
 
           function onClick(e) {
             if ($scope.startEnd.length < 2) {
@@ -73,6 +80,8 @@ angular.module('routesClientApp')
                 },
                 function success(status) {
                   $scope.error = true;
+                  $scope.message = 'A rota não está dentro dos estados permitidos. Trace novamente a rota.';
+                  $scope.class = 'danger'
                 }
               );
             }
