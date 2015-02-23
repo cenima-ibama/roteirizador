@@ -1,14 +1,14 @@
 <div class="route-info alert alert-{{class}}">
-  <div class="col-md-9 col-xs-12">
-    <p >{{message}}</p>
+  <div class="message col-md-9 col-xs-12">
+    <p>{{message}}</p>
   </div>
-  <div class="route-info-buttons route-info-itens col-md-3 col-xs-12" ng-hide="routeExists">
-    <a class="btn btn-primary" ng-click="sendRoute()" 
-    tabindex="0" data-toggle="popover" id="popoverNoRoute" 
-    data-content="Traçar rota válida" 
-    data-placement="left">Gravar Rota <span class="glyphicon glyphicon-ok"></span></a>
-    <a class="btn btn-warning" ng-click="clearMarkers()">Limpar <span class="glyphicon glyphicon-erase"></span></a>
+  <div class="route-info-buttons col-md-3 col-xs-12" ng-hide="routeExists">
+    <a class="btn btn-primary" ng-click="sendRoute()"
+    tabindex="0" data-toggle="popover" id="popoverNoRoute"
+    data-content="Traçar rota válida"
+    data-placement="left"><span class="glyphicon glyphicon-ok"></span> Gravar Rota</a>
+    <a class="btn btn-warning" ng-click="clearMarkers()"><span class="glyphicon glyphicon-remove"></span> Limpar</a>
   </div>
 </div>
 
-<div resizable ng-style="{ width: windowWidth, height: windowHeight}" id="map"></div>
+<div resizable ng-style="{ width: windowWidth, height: windowHeight - 70 }" id="map"></div>

@@ -39,7 +39,8 @@ angular.module('routesClientApp')
             routeWhileDragging: true
           });
           $scope.route.addTo(map);
-          $scope.message = 'Clique na cidade de origem e de destino para traçar a rota. Clique em Gravar para enviar a rota.';
+          $scope.message = 'Clique na cidade de origem e de destino para ' +
+            'traçar a rota. Em seguida, clique em Gravar para enviar a rota.';
           $scope.class = 'info'
 
           function onClick(e) {
