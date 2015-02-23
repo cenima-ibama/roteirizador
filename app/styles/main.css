@@ -6,11 +6,15 @@
 
 .route-info {
   min-height: 70px;
-  max-height: 100px;
+  padding-top: 0.8em;
 }
 
-.route-info-buttons{
+.route-info-buttons {
   text-align: center;
+}
+
+.route-info-itens {
+  padding-bottom: 0.5em;
 }
 
  .alert{
