@@ -48,7 +48,7 @@ angular.module('routesClientApp')
           }
           map.on('click', onClick);
 
-          $scope.eraseMarkers = function() {
+          $scope.resetRoute = function() {
             $scope.startEnd = [];
             $scope.route.setWaypoints($scope.startEnd);
           };
