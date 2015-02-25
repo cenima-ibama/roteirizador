@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ngMaterial'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -31,7 +32,11 @@ angular
         templateUrl: 'views/road-map.html',
         controller: 'RoadRouteCtrl'
       })
-      .when('/aerial-route', {
+      .when('/aerial-route/:authCode', {
+        templateUrl: 'views/aerial-map.html',
+        controller: 'AerialRouteCtrl'
+      })
+      .when('/aerial-route/:authCode/:states', {
         templateUrl: 'views/aerial-map.html',
         controller: 'AerialRouteCtrl'
       })
