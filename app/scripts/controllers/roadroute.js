@@ -28,9 +28,9 @@ angular.module('routesClientApp')
           $scope.route.addTo(map);
           $scope.routeExists = true;
           $scope.message = 'Rota com código de autorização ' + $routeParams.authCode;
-          $scope.class = 'success'
+          $scope.class = 'success';
         },
-        function error(data) {
+        function error() {
           $scope.startEnd = [];
           $scope.route = L.Routing.control({
             routeWhileDragging: true
@@ -38,7 +38,7 @@ angular.module('routesClientApp')
           $scope.route.addTo(map);
           $scope.message = 'Clique na cidade de origem e de destino para ' +
             'traçar a rota. Em seguida, clique em Gravar para enviar a rota.';
-          $scope.class = 'info'
+          $scope.class = 'info';
 
           function onClick(e) {
             if ($scope.startEnd.length < 2) {
@@ -48,7 +48,7 @@ angular.module('routesClientApp')
           }
           map.on('click', onClick);
 
-          $scope.clearMarkers = function() {
+          $scope.eraseMarkers = function() {
             $scope.startEnd = [];
             $scope.route.setWaypoints($scope.startEnd);
           };
@@ -73,19 +73,19 @@ angular.module('routesClientApp')
                     'coordinates': coordinates
                   }
                 },
-                function success(data) {
+                function success() {
                   $scope.success = true;
                 },
-                function success(status) {
+                function success() {
                   $scope.error = true;
-                  $scope.message = 'A rota não está dentro dos estados permitidos.' +
-                    ' Trace novamente.';
-                  $scope.class = 'danger'
+                  $scope.message = 'A rota não está dentro dos estados permitidos. ' +
+                    'Trace novamente.';
+                  $scope.class = 'danger';
                 }
               );
             }
             else {
-              $("#popoverNoRoute").popover('show');
+              $('#popoverNoRoute').popover('show');
             }
           };
         });
