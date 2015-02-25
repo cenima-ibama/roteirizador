@@ -9,8 +9,8 @@
  */
 
 angular.module('routesClientApp')
-  .controller('AerialRouteCtrl', ['$scope', 'RestApi',
-    function ($scope, RestApi) {
+  .controller('AerialRouteCtrl', ['$scope', '$compile', 'RestApi',
+    function ($scope, $compile, RestApi) {
       $scope.awesomeThings = [
         'HTML5 Boilerplate',
         'AngularJS',
@@ -26,12 +26,24 @@ angular.module('routesClientApp')
       $scope.origin = '';
       $scope.destination = '';
 
+      $scope.setOrigin = function(airportId) {
+        $scope.origin = airportId;
+      };
+
+      $scope.setDestination = function(airportId) {
+        $scope.destination = airportId;
+      };
+
       RestApi.query({type:'airports'}, function (data) {
         $scope.airports = L.geoJson(data, {
           pointToLayer: function(feature, latlng) {
+            var popupTpl = '<div markerpopup></div>';
+            var popupScope = $scope.$new();
+            popupScope.name = feature.properties.name;
+            popupScope.id = feature.id;
             return L.circleMarker(latlng, {weight: 1, opacity: 0.8})
               .setRadius(5)
-              .bindPopup(feature.properties.name);
+              .bindPopup($compile(angular.element(popupTpl))(popupScope)[0]);
           },
         });
         $scope.airports.addTo(map);

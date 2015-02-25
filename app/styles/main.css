@@ -17,10 +17,9 @@
   padding-bottom: 0.5em;
 }
 
- .alert{
+.alert{
   margin-bottom: 0 !important;
  }
-
 
 .leaflet-routing-container {
   margin: 7em 3em 0 0  !important;
