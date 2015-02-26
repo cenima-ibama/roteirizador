@@ -26,12 +26,12 @@ angular.module('routesClientApp')
         function success(data) {
           $scope.route = L.geoJson(data);
           $scope.route.addTo(map);
-          L.popup({closeButton: false})
+          L.popup()
             .setLatLng(data.geometry.coordinates[0].reverse())
-            .setContent('Início da Rota')
+            .setContent('Início da rota')
             .openOn(map);
           $scope.routeExists = true;
-          $scope.message = 'Rota com código de autorização ' + $routeParams.authCode;
+          $scope.message = 'Rota com código de autorização: ' + $routeParams.authCode;
           $scope.class = 'success';
         },
         function error() {
