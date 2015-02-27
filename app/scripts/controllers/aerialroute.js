@@ -36,8 +36,22 @@ angular.module('routesClientApp')
       };
 
       RestApi.query({type:'aerial-routes', authCode:$routeParams.authCode},
-        function success() {
-
+        function success(data) {
+          // origin airport
+          L.circleMarker(data.geometry.coordinates[0].reverse(),
+            {weight: 1, opacity: 0.8, color: 'green'}
+          ).setRadius(7)
+          .bindPopup('Aeroporto de Origem')
+          .addTo(map).openPopup();
+          // destination airport
+          L.circleMarker(data.geometry.coordinates[1].reverse(),
+            {weight: 1, opacity: 0.8, color: 'red'}
+          ).setRadius(7)
+          .bindPopup('Aeroporto de Destino')
+          .addTo(map);
+          $scope.routeExists = true;
+          $scope.message = 'Rota com código de autorização: ' + $routeParams.authCode;
+          $scope.class = 'success';
         },
         function error() {
           RestApi.query({type:'airports'}, function (data) {
