@@ -3,26 +3,28 @@
     <div class="col-md-6 col-xs-12 route-info-itens">
       <div class="input-group input-group-lg">
         <span class="input-group-addon" id="sizing-addon1">Origem</span>
-        <input type="text" class="form-control" ng-model="origin"
+        <input id="origin" value="" type="text" class="form-control"
         placeholder="Aeroporto de Origem" aria-describedby="sizing-addon1">
       </div>
     </div>
     <div class="col-md-6 col-xs-12 route-info-itens">
       <div class="input-group input-group-lg">
         <span class="input-group-addon" id="sizing-addon1">Destino</span>
-        <input type="text" class="form-control" ng-model="destination"
+        <input id="destination" value="" type="text" class="form-control"
         placeholder="Aeroporto de Destino" aria-describedby="sizing-addon1">
       </div>
     </div>
   </div>
   <div class="col-md-3 col-sm-4 col-xs-12 route-info-buttons route-info-itens" ng-hide="routeExists">
     <div class="route-info-itens">
-      <button class="btn btn-primary">
+      <button class="btn btn-primary" ng-click="sendRoute()" tabindex="0"
+        data-toggle="popover" id="popoverNoRoute" data-placement="left"
+        data-content="Trace uma rota válida." data-trigger="focus">
         <span class="glyphicon glyphicon-ok"></span> Gravar Rota
       </button>
       <button class="btn btn-warning" ng-click="resetRoute()">
         <span class="glyphicon glyphicon-remove"></span> Limpar
-      </button>  
+      </button>
     </div>
   </div>
 </div>
