@@ -65,9 +65,6 @@ angular.module('routesClientApp')
                 }
               );
 
-              $scope.success = false;
-              $scope.error = false;
-
               RestApi.save({type:'road-routes'},
                 {
                   'auth_code': $routeParams.authCode,
@@ -78,9 +75,9 @@ angular.module('routesClientApp')
                   }
                 },
                 function success() {
-                  $scope.success = true;
+                  console.log('success!')
                 },
-                function success() {
+                function error() {
                   $scope.error = true;
                   $scope.message = 'A rota não está dentro dos estados permitidos. ' +
                     'Trace novamente.';
@@ -92,6 +89,7 @@ angular.module('routesClientApp')
               $('#popoverNoRoute').popover('show');
             }
           };
-        });
+        }
+      );
     }
   ]);
