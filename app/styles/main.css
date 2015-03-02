@@ -36,3 +36,13 @@
 .leaflet-routing-container {
   background-color: #fff;
 }
+
+.ui-autocomplete {
+  position: absolute;
+  max-height: 200px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+  max-width: 450px;
+  background-color: #fff;
+}
