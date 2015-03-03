@@ -58,7 +58,10 @@ angular.module('routesClientApp')
               'destination': $scope.destination
             },
             function success() {
-              alert('success');
+              $scope.routeExists = true;
+              $scope.message = 'Rota registrada com sucesso. ' +
+                'Código de autorização: ' + $routeParams.authCode;
+              $scope.class = 'success';
             },
             function error() {
               $scope.error = true;
@@ -90,7 +93,8 @@ angular.module('routesClientApp')
           .addTo(map);
 
           $scope.routeExists = true;
-          $scope.message = 'Rota com código de autorização: ' + $routeParams.authCode;
+          $scope.message = 'Rota com código de autorização: ' + $routeParams.authCode +
+            '. ' + data.properties.origin_name + ' → ' + data.properties.destination_name;
           $scope.class = 'success';
         },
         function error() {
@@ -108,6 +112,7 @@ angular.module('routesClientApp')
               },
             });
 
+            $scope.class = 'info';
             $scope.airportList = data.features.map(
               function(i) {
                 return {value: i.id,

@@ -1,5 +1,5 @@
-<div class="route-info">
-  <div class="col-md-9 col-sm-8">
+<div class="route-info alert-{{class}}">
+  <div class="col-md-9 col-sm-8" ng-hide="routeExists">
     <div class="col-md-6 col-xs-12 route-info-itens">
       <div class="input-group input-group-lg">
         <span class="input-group-addon" id="sizing-addon1">Origem</span>
@@ -26,6 +26,9 @@
         <span class="glyphicon glyphicon-remove"></span> Limpar
       </button>
     </div>
+  </div>
+  <div class="message col-md-9 col-xs-12" ng-show="routeExists">
+    <h4>{{message}}</h4>
   </div>
 </div>
 

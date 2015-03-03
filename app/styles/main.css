@@ -6,7 +6,9 @@
 
 .route-info {
   min-height: 70px;
-  padding-bottom: 0.8em;
+  position: relative;
+  /*padding-bottom: 0.8em;*/
+  width: 100%;
 }
 
 .route-info-buttons {

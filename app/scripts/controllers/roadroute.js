@@ -75,7 +75,10 @@ angular.module('routesClientApp')
                   }
                 },
                 function success() {
-                  console.log('success!')
+                  $scope.routeExists = true;
+                  $scope.message = 'Rota registrada com sucesso. ' +
+                    'Código de autorização: ' + $routeParams.authCode;
+                  $scope.class = 'success';
                 },
                 function error() {
                   $scope.error = true;
