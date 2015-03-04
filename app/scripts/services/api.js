@@ -9,7 +9,7 @@
  */
 angular.module('routesClientApp')
   .factory('RestApi', ['$resource', function ($resource) {
-    return $resource('http://localhost:8000/api/:type/:authCode', {},
+    return $resource('http://localhost:8000/api/:type/:authCode/', {},
       {
         query: {
           method:'GET',
