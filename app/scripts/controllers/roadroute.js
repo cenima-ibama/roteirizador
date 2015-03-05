@@ -22,7 +22,7 @@ angular.module('routesClientApp')
           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);
 
-      RestApi.query({type:'road-routes', authCode:$routeParams.authCode},
+      RestApi.getRoute({type:'road-routes', authCode:$routeParams.authCode},
         function success(data) {
           $scope.route = L.geoJson(data);
           $scope.route.addTo(map);

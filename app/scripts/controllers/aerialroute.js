@@ -69,14 +69,14 @@ angular.module('routesClientApp')
                 'Trace novamente.';
               $scope.class = 'danger';
             }
-          )
+          );
         }
         else {
           $('#popoverNoRoute').popover('show');
         }
       };
 
-      RestApi.query({type:'aerial-routes', authCode:$routeParams.authCode},
+      RestApi.getRoute({type:'aerial-routes', authCode:$routeParams.authCode},
         function success(data) {
           // add origin airport to map
           L.circleMarker(data.geometry.coordinates[0].reverse(),
