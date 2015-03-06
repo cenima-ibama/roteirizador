@@ -4,18 +4,18 @@
   width: 100%;
 }
 
-.route-info {
+.route-bar {
   min-height: 70px;
   position: relative;
   /*padding-bottom: 0.8em;*/
   width: 100%;
 }
 
-.route-info-buttons {
+.route-bar-buttons {
   text-align: center;
 }
 
-.route-info-itens {
+.route-bar-itens {
   padding: 0.5em 0;
 }
 

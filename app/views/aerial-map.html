@@ -1,13 +1,13 @@
-<div class="route-info alert-{{class}}">
+<div class="route-bar alert-{{class}}">
   <div class="col-md-9 col-sm-8" ng-hide="routeExists">
-    <div class="col-md-6 col-xs-12 route-info-itens">
+    <div class="col-md-6 col-xs-12 route-bar-itens">
       <div class="input-group input-group-lg">
         <span class="input-group-addon" id="sizing-addon1">Origem</span>
         <input id="origin" value="" type="text" class="form-control"
         placeholder="Aeroporto de Origem" aria-describedby="sizing-addon1">
       </div>
     </div>
-    <div class="col-md-6 col-xs-12 route-info-itens">
+    <div class="col-md-6 col-xs-12 route-bar-itens">
       <div class="input-group input-group-lg">
         <span class="input-group-addon" id="sizing-addon1">Destino</span>
         <input id="destination" value="" type="text" class="form-control"
@@ -15,8 +15,8 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3 col-sm-4 col-xs-12 route-info-buttons route-info-itens" ng-hide="routeExists">
-    <div class="route-info-itens">
+  <div class="col-md-3 col-sm-4 col-xs-12 route-bar-buttons route-bar-itens" ng-hide="routeExists">
+    <div class="route-bar-itens">
       <button class="btn btn-primary" ng-click="sendRoute()" tabindex="0"
         data-toggle="popover" id="popoverNoRoute" data-placement="left"
         data-content="Trace uma rota válida." data-trigger="focus">

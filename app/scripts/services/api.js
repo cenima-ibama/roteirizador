@@ -31,8 +31,7 @@ angular.module('routesClientApp')
         save: {
           method:'POST',
           headers: {'Authorization':token,
-            'Content-Type': 'application/json'},
-          params:{authCode:''}
+            'Content-Type': 'application/json'}
           },
       },
       {stripTrailingSlashes: false}
