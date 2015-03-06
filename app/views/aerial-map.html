@@ -16,16 +16,7 @@
     </div>
   </div>
   <div class="col-md-3 col-sm-4 col-xs-12 route-bar-buttons route-bar-itens" ng-hide="routeExists">
-    <div class="route-bar-itens">
-      <button class="btn btn-primary" ng-click="sendRoute()" tabindex="0"
-        data-toggle="popover" id="popoverNoRoute" data-placement="left"
-        data-content="Trace uma rota válida." data-trigger="focus">
-        <span class="glyphicon glyphicon-ok"></span> Gravar Rota
-      </button>
-      <button class="btn btn-warning" ng-click="resetRoute()">
-        <span class="glyphicon glyphicon-remove"></span> Limpar
-      </button>
-    </div>
+    <div route-bar-buttons class="route-bar-itens"></div>
   </div>
   <div class="message col-md-9 col-xs-12" ng-show="routeExists">
     <h4>{{message}}</h4>

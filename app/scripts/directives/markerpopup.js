@@ -8,7 +8,5 @@
  */
 angular.module('routesClientApp')
   .directive('markerpopup', function () {
-    return {
-      templateUrl: 'views/marker-popup.html',
-    };
+    return {templateUrl: 'views/marker-popup.html',};
   });

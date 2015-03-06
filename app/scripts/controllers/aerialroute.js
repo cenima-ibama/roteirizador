@@ -49,7 +49,7 @@ angular.module('routesClientApp')
       };
 
       $scope.sendRoute = function() {
-        if ($scope.origin  && $scope.destination) {
+        if ($scope.origin && $scope.destination) {
           RestApi.save({type: 'aerial-routes'},
             {
               'auth_code': $routeParams.authCode,
