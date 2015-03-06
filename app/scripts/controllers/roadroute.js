@@ -31,8 +31,10 @@ angular.module('routesClientApp')
             .setContent('Início da rota')
             .openOn(map);
           $scope.routeExists = true;
-          $scope.message = 'Rota com código de autorização: ' + $routeParams.authCode;
           $scope.class = 'success';
+          $scope.authCode = $routeParams.authCode;
+          $scope.origin = data.properties.origin_name;
+          $scope.destination = data.properties.destination_name;
         },
         function error() {
           $scope.startEnd = [];

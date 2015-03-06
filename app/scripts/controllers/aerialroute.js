@@ -9,8 +9,8 @@
  */
 
 angular.module('routesClientApp')
-  .controller('AerialRouteCtrl', ['$scope', '$routeParams', '$compile', 'RestApi',
-    function ($scope, $routeParams, $compile, RestApi) {
+  .controller('AerialRouteCtrl', ['$scope', '$route', '$routeParams', '$compile', 'RestApi',
+    function ($scope, $route, $routeParams, $compile, RestApi) {
       $scope.awesomeThings = [
         'HTML5 Boilerplate',
         'AngularJS',
@@ -59,9 +59,10 @@ angular.module('routesClientApp')
             },
             function success() {
               $scope.routeExists = true;
-              $scope.message = 'Rota registrada com sucesso. ' +
-                'Código de autorização: ' + $routeParams.authCode;
               $scope.class = 'success';
+              $scope.authCode = $routeParams.authCode;
+              $scope.origin = data.properties.origin_name;
+              $scope.destination = data.properties.destination_name;;
             },
             function error() {
               $scope.error = true;
@@ -93,9 +94,10 @@ angular.module('routesClientApp')
           .addTo(map);
 
           $scope.routeExists = true;
-          $scope.message = 'Rota com código de autorização: ' + $routeParams.authCode +
-            '. ' + data.properties.origin_name + ' → ' + data.properties.destination_name;
           $scope.class = 'success';
+          $scope.authCode = $routeParams.authCode;
+          $scope.origin = data.properties.origin_name;
+          $scope.destination = data.properties.destination_name;
         },
         function error() {
           RestApi.query({type:'airports'}, function (data) {

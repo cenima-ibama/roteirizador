@@ -1,26 +1,27 @@
-<div class="route-bar alert-{{class}}">
-  <div class="col-md-9 col-sm-8" ng-hide="routeExists">
-    <div class="col-md-6 col-xs-12 route-bar-itens">
-      <div class="input-group input-group-lg">
-        <span class="input-group-addon" id="sizing-addon1">Origem</span>
-        <input id="origin" value="" type="text" class="form-control"
-        placeholder="Aeroporto de Origem" aria-describedby="sizing-addon1">
+<div class="route-bar bg-{{class}}">
+  <div ng-hide="routeExists">
+    <div class="col-md-10 col-sm-8">
+      <div class="col-md-6 col-xs-12 route-bar-itens">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="sizing-addon1">Origem</span>
+          <input id="origin" value="" type="text" class="form-control"
+          placeholder="Aeroporto de Origem" aria-describedby="sizing-addon1">
+        </div>
+      </div>
+      <div class="col-md-6 col-xs-12 route-bar-itens">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="sizing-addon1">Destino</span>
+          <input id="destination" value="" type="text" class="form-control"
+          placeholder="Aeroporto de Destino" aria-describedby="sizing-addon1">
+        </div>
       </div>
     </div>
-    <div class="col-md-6 col-xs-12 route-bar-itens">
-      <div class="input-group input-group-lg">
-        <span class="input-group-addon" id="sizing-addon1">Destino</span>
-        <input id="destination" value="" type="text" class="form-control"
-        placeholder="Aeroporto de Destino" aria-describedby="sizing-addon1">
-      </div>
+    <div class="col-md-2 col-sm-4 col-xs-12 route-bar-buttons route-bar-itens">
+      <div route-bar-buttons class="route-bar-itens"></div>
     </div>
   </div>
-  <div class="col-md-3 col-sm-4 col-xs-12 route-bar-buttons route-bar-itens" ng-hide="routeExists">
-    <div route-bar-buttons class="route-bar-itens"></div>
-  </div>
-  <div class="message col-md-9 col-xs-12" ng-show="routeExists">
-    <h4>{{message}}</h4>
-  </div>
+
+  <div route-bar-info class="text-center" ng-show="routeExists"></div>
 </div>
 
 <div resizable ng-style="{ width: windowWidth, height: windowHeight - 70 }" id="map"></div>

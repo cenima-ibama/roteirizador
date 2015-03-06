@@ -1,11 +1,12 @@
-<div class="route-bar alert-{{class}}">
-  <div class="message col-md-9 col-xs-12">
-    <h4>{{message}}</h4>
+<div class="route-bar bg-{{class}}">
+  <div class="route-bar-itens" ng-hide="routeExists">
+    <div class="text-center text-{{class}} route-bar-itens col-md-9 col-xs-12">
+      <h4>{{message}}</h4>
+    </div>
+    <div route-bar-buttons class="route-bar-itens col-md-3 col-xs-12 text-center"></div>
   </div>
 
-  <div class="route-bar-itens col-md-3 col-xs-12 route-bar-buttons" ng-hide="routeExists">
-    <div route-bar-buttons class="route-bar-itens"></div>
-  </div>
+  <div route-bar-info class="text-center" ng-show="routeExists"></div>
 </div>
 
 <div resizable ng-style="{ width: windowWidth, height: windowHeight - 70 }" id="map"></div>

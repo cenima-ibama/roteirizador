@@ -6,13 +6,14 @@
 
 .route-bar {
   min-height: 70px;
+  max-height: 210px;
   position: relative;
   /*padding-bottom: 0.8em;*/
   width: 100%;
 }
 
-.route-bar-buttons {
-  text-align: center;
+.route-bar h4 {
+  margin: 0 !important;
 }
 
 .route-bar-itens {

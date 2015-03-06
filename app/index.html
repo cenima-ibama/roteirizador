@@ -49,21 +49,22 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/roadroute.js"></script>
-        <script src="scripts/controllers/aerialroute.js"></script>
-        <script src="scripts/directives/resizable.js"></script>
-        <script src="scripts/directives/markerpopup.js"></script>
-        <script src="scripts/services/api.js"></script>
-        <!-- endbuild -->
-
     <!-- build:js(.) scripts/extra.js -->
     <script src="bower_components/leaflet-routing-machine/dist/leaflet-routing-machine.min.js"></script>
     <script src="bower_components/leaflet-control-geocoder/Control.Geocoder.js"></script>
     <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/roadroute.js"></script>
+    <script src="scripts/controllers/aerialroute.js"></script>
+    <script src="scripts/directives/resizable.js"></script>
+    <script src="scripts/directives/markerpopup.js"></script>
+    <script src="scripts/services/api.js"></script>
     <script src="scripts/directives/route-bar-buttons.js"></script>
+    <script src="scripts/directives/route-bar-info.js"></script>
     <!-- endbuild -->
 </body>
 </html>
