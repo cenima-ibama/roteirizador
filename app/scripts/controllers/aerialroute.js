@@ -28,6 +28,7 @@ angular.module('routesClientApp')
 
       $scope.setOrigin = function(airportId, name, latLng) {
         $scope.origin = airportId;
+        $scope.origin_name = name;
         $('#origin').val(name);
         $scope.originLayer.clearLayers();
         L.marker(latLng).addTo($scope.originLayer);
@@ -35,6 +36,7 @@ angular.module('routesClientApp')
 
       $scope.setDestination = function(airportId, name, latLng) {
         $scope.destination = airportId;
+        $scope.destination_name = name;
         $('#destination').val(name);
         $scope.destinationLayer.clearLayers();
         L.marker(latLng).addTo($scope.destinationLayer);
@@ -60,19 +62,19 @@ angular.module('routesClientApp')
             function success() {
               $scope.routeExists = true;
               $scope.class = 'success';
-              $scope.authCode = $routeParams.authCode;
-              $scope.origin = data.properties.origin_name;
-              $scope.destination = data.properties.destination_name;;
+              $route.reload();
             },
             function error() {
               $scope.error = true;
-              $scope.message = 'A rota não está dentro dos estados permitidos. ' +
-                'Trace novamente.';
               $scope.class = 'danger';
+              $scope.errorMessage = 'A rota não está dentro dos estados permitidos. ' +
+                'Trace novamente.';
+              $('#popoverNoRoute').popover('show');
             }
           );
         }
         else {
+          $scope.errorMessage = 'Trace uma rota válida';
           $('#popoverNoRoute').popover('show');
         }
       };
@@ -96,8 +98,8 @@ angular.module('routesClientApp')
           $scope.routeExists = true;
           $scope.class = 'success';
           $scope.authCode = $routeParams.authCode;
-          $scope.origin = data.properties.origin_name;
-          $scope.destination = data.properties.destination_name;
+          $scope.origin_name = data.properties.origin_name;
+          $scope.destination_name = data.properties.destination_name;
         },
         function error() {
           RestApi.query({type:'airports'}, function (data) {

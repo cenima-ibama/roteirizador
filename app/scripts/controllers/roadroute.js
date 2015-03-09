@@ -8,8 +8,8 @@
  * Controller of the routesClientApp
  */
 angular.module('routesClientApp')
-  .controller('RoadRouteCtrl', ['$scope', '$routeParams', 'RestApi',
-    function ($scope, $routeParams, RestApi) {
+  .controller('RoadRouteCtrl', ['$scope', '$route', '$routeParams', 'RestApi',
+    function ($scope, $route, $routeParams, RestApi) {
       $scope.awesomeThings = [
         'HTML5 Boilerplate',
         'AngularJS',
@@ -78,9 +78,8 @@ angular.module('routesClientApp')
                 },
                 function success() {
                   $scope.routeExists = true;
-                  $scope.message = 'Rota registrada com sucesso. ' +
-                    'Código de autorização: ' + $routeParams.authCode;
                   $scope.class = 'success';
+                  $route.reload();
                 },
                 function error() {
                   $scope.error = true;
@@ -91,6 +90,7 @@ angular.module('routesClientApp')
               );
             }
             else {
+              $scope.errorMessage = 'Trace uma rota válida';
               $('#popoverNoRoute').popover('show');
             }
           };

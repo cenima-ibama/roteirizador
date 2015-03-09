@@ -1,6 +1,6 @@
 <button class="btn btn-primary" ng-click="sendRoute()" tabindex="0"
   data-toggle="popover" id="popoverNoRoute" data-placement="left"
-  data-content="Trace uma rota válida." data-trigger="focus">
+  data-content="{{errorMessage}}" data-trigger="focus">
   <span class="glyphicon glyphicon-ok"></span> Gravar Rota
 </button>
 <button class="btn btn-warning" ng-click="resetRoute()">
