@@ -10,7 +10,6 @@
  */
 angular
   .module('routesClientApp', [
-    'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
