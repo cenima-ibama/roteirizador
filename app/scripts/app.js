@@ -22,19 +22,19 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/road-route/:authCode', {
+      .when('/road-routes/:authCode', {
         templateUrl: 'views/road-map.html',
         controller: 'RoadRouteCtrl'
       })
-      .when('/road-route/:authCode/:states', {
+      .when('/road-routes/:authCode/:states', {
         templateUrl: 'views/road-map.html',
         controller: 'RoadRouteCtrl'
       })
-      .when('/aerial-route/:authCode', {
+      .when('/aerial-routes/:authCode', {
         templateUrl: 'views/aerial-map.html',
         controller: 'AerialRouteCtrl'
       })
-      .when('/aerial-route/:authCode/:states', {
+      .when('/aerial-routes/:authCode/:airports', {
         templateUrl: 'views/aerial-map.html',
         controller: 'AerialRouteCtrl'
       })
