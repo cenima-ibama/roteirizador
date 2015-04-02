@@ -33,8 +33,8 @@ angular.module('routesClientApp')
           $scope.routeExists = true;
           $scope.class = 'success';
           $scope.authCode = $routeParams.authCode;
-          $scope.origin = data.properties.origin_name;
-          $scope.destination = data.properties.destination_name;
+          $scope.origin = data.properties.origin;
+          $scope.destination = data.properties.destination;
         },
         function error() {
           $scope.startEnd = [];
@@ -54,6 +54,21 @@ angular.module('routesClientApp')
           }
           map.on('click', onClick);
 
+          function getRoadsName(item) {
+            return item.road
+          }
+
+          function filterRoadsName(road) {
+            return road.match(/^([A-Z]{2}\-[0-9]{3})|[A-Z]{2}\-[0-9]{3};\s+[A-Z]{2}\-[0-9]{3}$/) != null;
+          }
+
+          function distinct(list, item) {
+            if (list.indexOf(item) === -1) {
+              list.push(item);
+            }
+            return list;
+          }
+
           $scope.resetRoute = function() {
             $scope.startEnd = [];
             $scope.route.setWaypoints($scope.startEnd);
@@ -67,10 +82,17 @@ angular.module('routesClientApp')
                 }
               );
 
+              var roads = $scope.route._routes[0].instructions
+                .map(getRoadsName)
+                .filter(filterRoadsName)
+                .reduce(distinct, [])
+                .toString();
+
               RestApi.save({type:'road-routes'},
                 {
                   'auth_code': $routeParams.authCode,
                   'states': $routeParams.states.split(','),
+                  'roads': roads,
                   'geom':{
                     'type': 'LineString',
                     'coordinates': coordinates
