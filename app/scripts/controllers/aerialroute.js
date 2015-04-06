@@ -55,7 +55,6 @@ angular.module('routesClientApp')
           RestApi.save({type: 'aerial-routes'},
             {
               'auth_code': $routeParams.authCode,
-              'states': $routeParams.states.split(','),
               'origin': $scope.origin,
               'destination': $scope.destination
             },
@@ -67,8 +66,8 @@ angular.module('routesClientApp')
             function error() {
               $scope.error = true;
               $scope.class = 'danger';
-              $scope.errorMessage = 'A rota não está dentro dos estados permitidos. ' +
-                'Trace novamente.';
+              $scope.errorMessage = 'Não foi possível enviar a rota. ' +
+                'Tente novamente.';
               $('#popoverNoRoute').popover('show');
             }
           );
@@ -102,7 +101,7 @@ angular.module('routesClientApp')
           $scope.destination_name = data.properties.destination_name;
         },
         function error() {
-          RestApi.query({type:'airports'}, function (data) {
+          RestApi.query({type:'airports', ids: $routeParams.airports}, function (data) {
             $scope.airports = L.geoJson(data, {
               pointToLayer: function(feature, latlng) {
                 var popupTpl = '<div markerpopup></div>';

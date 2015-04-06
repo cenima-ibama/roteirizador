@@ -33,8 +33,8 @@ angular.module('routesClientApp')
           $scope.routeExists = true;
           $scope.class = 'success';
           $scope.authCode = $routeParams.authCode;
-          $scope.origin = data.properties.origin;
-          $scope.destination = data.properties.destination;
+          $scope.origin_name = data.properties.origin;
+          $scope.destination_name = data.properties.destination;
         },
         function error() {
           $scope.startEnd = [];
