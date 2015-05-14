@@ -134,7 +134,7 @@ angular.module('routesClientApp')
         function error() {
           RestApi.query({type:$scope.placeType, ids: $routeParams.ids}, function (data) {
             $scope.places = L.geoJson(data, {
-              pointToLayer: function(feature, latLng) {
+              pointToLayer: function(feature) {
                 var popupTpl = '<div markerpopup></div>';
                 var popupScope = $scope.$new();
                 popupScope.name = feature.properties.name;
