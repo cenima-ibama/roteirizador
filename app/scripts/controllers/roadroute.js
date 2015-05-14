@@ -55,11 +55,11 @@ angular.module('routesClientApp')
           map.on('click', onClick);
 
           function getRoadsName(item) {
-            return item.road
+            return item.road;
           }
 
           function filterRoadsName(road) {
-            return road.match(/.*([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3}).*/) != null;
+            return road.match(/.*([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3}).*/) !== null;
           }
 
           function distinct(list, item) {

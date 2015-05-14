@@ -4,18 +4,28 @@
  * @ngdoc function
  * @name routesClientApp.controller:AerialRouteCtrl
  * @description
- * # AerialroutectrlCtrl
+ * # AerialAquaticsRouteCtrl
  * Controller of the routesClientApp
  */
 
 angular.module('routesClientApp')
-  .controller('AerialRouteCtrl', ['$scope', '$route', '$routeParams', '$compile', 'RestApi',
-    function ($scope, $route, $routeParams, $compile, RestApi) {
+  .controller('AerialAquaticRoutesCtrl', ['$scope', '$location', '$route', '$routeParams', '$compile', 'RestApi',
+    function ($scope, $location, $route, $routeParams, $compile, RestApi) {
       $scope.awesomeThings = [
         'HTML5 Boilerplate',
         'AngularJS',
         'Karma'
       ];
+
+      $scope.routeType = $location.path().split('/')[1];
+
+      if ($scope.routeType === 'aerial-routes') {
+        $scope.placeType = 'airports';
+        $scope.placeTypeName = 'Aeroporto';
+      } else if ($scope.routeType === 'river-routes' || $scope.routeType === 'sea-routes') {
+        $scope.placeType = 'shipping-places';
+        $scope.placeTypeName = 'Local';
+      }
 
       L.Icon.Default.imagePath = 'images';
       var map = L.map('map').setView([-35, -58], 4);
@@ -26,16 +36,44 @@ angular.module('routesClientApp')
       $scope.originLayer = L.layerGroup().addTo(map);
       $scope.destinationLayer = L.layerGroup().addTo(map);
 
-      $scope.setOrigin = function(airportId, name, latLng) {
-        $scope.origin = airportId;
+      $scope.showPlace = function(geom, isOrigin) {
+        var popupMessage, color;
+        if (isOrigin === true) {
+          popupMessage = $scope.placeTypeName + ' de Origem';
+          color = 'green';
+        } else {
+          popupMessage = $scope.placeTypeName + ' de Destino';
+          color = 'red';
+        }
+
+        if (geom.type === 'Point') {
+          return L.circleMarker(geom.coordinates.reverse(),
+            {weight: 1, opacity: 0.8, color: color}
+          ).setRadius(7)
+          .bindPopup(popupMessage)
+          .addTo(map);
+        } else {
+          var coordinates = geom.coordinates.map(
+            function(coordinate) {
+              return coordinate.reverse();
+            }
+          );
+          return L.polygon(coordinates, {weight: 1, opacity: 0.8, color: color}
+          ).bindPopup(popupMessage)
+          .addTo(map);
+        }
+      };
+
+      $scope.setOrigin = function(id, name, latLng) {
+        $scope.origin = id;
         $scope.origin_name = name;
         $('#origin').val(name);
         $scope.originLayer.clearLayers();
         L.marker(latLng).addTo($scope.originLayer);
       };
 
-      $scope.setDestination = function(airportId, name, latLng) {
-        $scope.destination = airportId;
+      $scope.setDestination = function(id, name, latLng) {
+        $scope.destination = id;
         $scope.destination_name = name;
         $('#destination').val(name);
         $scope.destinationLayer.clearLayers();
@@ -52,7 +90,7 @@ angular.module('routesClientApp')
 
       $scope.sendRoute = function() {
         if ($scope.origin && $scope.destination) {
-          RestApi.save({type: 'aerial-routes'},
+          RestApi.save({type:$scope.routeType},
             {
               'auth_code': $routeParams.authCode,
               'origin': $scope.origin,
@@ -78,21 +116,14 @@ angular.module('routesClientApp')
         }
       };
 
-      RestApi.getRoute({type:'aerial-routes', authCode:$routeParams.authCode},
+      RestApi.getRoute({type:$scope.routeType, authCode:$routeParams.authCode},
         function success(data) {
-          // add origin airport to map
-          L.circleMarker(data.geometry.coordinates[0].reverse(),
-            {weight: 1, opacity: 0.8, color: 'green'}
-          ).setRadius(7)
-          .bindPopup('Aeroporto de Origem')
-          .addTo(map).openPopup();
+          // add origin place to map and open popup
+          $scope.originPlace = $scope.showPlace(data.geometry.geometries[0], true);
+          $scope.originPlace.openPopup();
 
-          // add destination airport to map
-          L.circleMarker(data.geometry.coordinates[1].reverse(),
-            {weight: 1, opacity: 0.8, color: 'red'}
-          ).setRadius(7)
-          .bindPopup('Aeroporto de Destino')
-          .addTo(map);
+          // add destination place to map
+          $scope.destinationPlace = $scope.showPlace(data.geometry.geometries[1], false);
 
           $scope.routeExists = true;
           $scope.class = 'success';
@@ -101,22 +132,33 @@ angular.module('routesClientApp')
           $scope.destination_name = data.properties.destination_name;
         },
         function error() {
-          RestApi.query({type:'airports', ids: $routeParams.airports}, function (data) {
-            $scope.airports = L.geoJson(data, {
-              pointToLayer: function(feature, latlng) {
+          RestApi.query({type:$scope.placeType, ids: $routeParams.ids}, function (data) {
+            $scope.places = L.geoJson(data, {
+              pointToLayer: function(feature, latLng) {
                 var popupTpl = '<div markerpopup></div>';
                 var popupScope = $scope.$new();
                 popupScope.name = feature.properties.name;
                 popupScope.id = feature.id;
-                popupScope.latLng = feature.geometry.coordinates.reverse();
-                return L.circleMarker(latlng, {weight: 1, opacity: 0.8})
-                  .setRadius(5)
+
+                if (feature.geometry.type === 'Point') {
+                  popupScope.latLng = feature.geometry.coordinates.reverse();
+                  L.circleMarker(popupScope.latLng, {weight: 1, opacity: 0.8})
+                    .setRadius(5)
+                    .addTo(map)
+                    .bindPopup($compile(angular.element(popupTpl))(popupScope)[0]);
+                } else {
+                  popupScope.latLng = turf.centroid(feature)
+                    .geometry.coordinates.reverse();
+                  L.polygon(feature.geometry.coordinates)
+                  .addTo(map)
                   .bindPopup($compile(angular.element(popupTpl))(popupScope)[0]);
+                }
               },
             });
+            $scope.places2 = L.geoJson(data).addTo(map);
 
             $scope.class = 'info';
-            $scope.airportList = data.features.map(
+            $scope.placeList = data.features.map(
               function(i) {
                 return {value: i.id,
                   label: i.properties.name,
@@ -126,7 +168,7 @@ angular.module('routesClientApp')
             );
             $('#origin').autocomplete({
               minLength: 4,
-              source: $scope.airportList,
+              source: $scope.placeList,
                select: function(event, ui) {
                  $scope.setOrigin(ui.item.value, ui.item.label, ui.item.coordinates);
                  return false;
@@ -134,13 +176,13 @@ angular.module('routesClientApp')
             });
             $('#destination').autocomplete({
               minLength: 4,
-              source: $scope.airportList,
+              source: $scope.placeList,
                select: function(event, ui) {
                  $scope.setDestination(ui.item.value, ui.item.label, ui.item.coordinates);
                  return false;
                }
             });
-            $scope.airports.addTo(map);
+            $scope.places.addTo(map);
           });
         });
     }

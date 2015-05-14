@@ -15,7 +15,8 @@
     "leaflet": "latest",
     "leaflet-routing-machine": "latest",
     "leaflet-control-geocoder": "latest",
-    "jquery-ui": "latest"
+    "jquery-ui": "latest",
+    "turf": "latest"
   },
   "devDependencies": {
     "angular-mocks": "~1.3.14",
