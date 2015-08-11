@@ -48,4 +48,8 @@
   overflow-x: hidden;
   max-width: 450px;
   background-color: #fff;
+  /*defining font style*/
+  font-size: 16px;
+  list-style-type: none;
+  padding-left: 1em;
 }
