@@ -8,8 +8,8 @@
  * Service in the routesClientApp.
  */
 
- var baseUrl = 'http://localhost:8000';
- var token = 'Token 54a327ae2741a50d629a4fd390142e72426a7ad3';
+ var baseUrl = 'http://10.1.8.55:8000';
+ var token = 'Token 767fcc3443ca22f3780c29c20bb88f3da2038cf7';
 
 angular.module('routesClientApp')
   .factory('RestApi', ['$resource', function ($resource) {

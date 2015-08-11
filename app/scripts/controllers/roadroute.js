@@ -10,11 +10,6 @@
 angular.module('routesClientApp')
   .controller('RoadRouteCtrl', ['$scope', '$route', '$routeParams', 'RestApi',
     function ($scope, $route, $routeParams, RestApi) {
-      $scope.awesomeThings = [
-        'HTML5 Boilerplate',
-        'AngularJS',
-        'Karma'
-      ];
 
       L.Icon.Default.imagePath = 'images';
       var map = L.map('map').setView([-35, -58], 4);

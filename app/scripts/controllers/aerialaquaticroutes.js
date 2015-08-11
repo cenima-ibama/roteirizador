@@ -11,11 +11,6 @@
 angular.module('routesClientApp')
   .controller('AerialAquaticRoutesCtrl', ['$scope', '$location', '$route', '$routeParams', '$compile', 'RestApi',
     function ($scope, $location, $route, $routeParams, $compile, RestApi) {
-      $scope.awesomeThings = [
-        'HTML5 Boilerplate',
-        'AngularJS',
-        'Karma'
-      ];
 
       $scope.routeType = $location.path().split('/')[1];
 
@@ -134,35 +129,34 @@ angular.module('routesClientApp')
         function error() {
           RestApi.query({type:$scope.placeType, ids: $routeParams.ids}, function (data) {
             $scope.places = L.geoJson(data, {
-              pointToLayer: function(feature) {
+              onEachFeature: function(feature) {
                 var popupTpl = '<div markerpopup></div>';
                 var popupScope = $scope.$new();
                 popupScope.name = feature.properties.name;
                 popupScope.id = feature.id;
 
+                popupScope.latLng = L.geoJson(feature).getBounds().getCenter();
+
                 if (feature.geometry.type === 'Point') {
-                  popupScope.latLng = feature.geometry.coordinates.reverse();
                   L.circleMarker(popupScope.latLng, {weight: 1, opacity: 0.8})
+                    .bindPopup($compile(angular.element(popupTpl))(popupScope)[0])
                     .setRadius(5)
-                    .addTo(map)
-                    .bindPopup($compile(angular.element(popupTpl))(popupScope)[0]);
+                    .addTo(map);
                 } else {
-                  popupScope.latLng = turf.centroid(feature)
-                    .geometry.coordinates.reverse();
-                  L.polygon(feature.geometry.coordinates)
-                  .addTo(map)
-                  .bindPopup($compile(angular.element(popupTpl))(popupScope)[0]);
+                  L.geoJson(feature)
+                    .bindPopup($compile(angular.element(popupTpl))(popupScope)[0])
+                    .addTo(map);
                 }
-              },
+              }
             });
-            $scope.places2 = L.geoJson(data).addTo(map);
+            // $scope.places2 = L.geoJson(data);
 
             $scope.class = 'info';
             $scope.placeList = data.features.map(
               function(i) {
                 return {value: i.id,
                   label: i.properties.name,
-                  coordinates: i.geometry.coordinates
+                  coordinates: L.geoJson(i.geometry).getBounds().getCenter(),
                   };
               }
             );
@@ -182,7 +176,6 @@ angular.module('routesClientApp')
                  return false;
                }
             });
-            $scope.places.addTo(map);
           });
         });
     }
