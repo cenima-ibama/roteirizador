@@ -168,6 +168,7 @@ angular.module('routesClientApp')
                  return false;
                }
             });
+
             $('#destination').autocomplete({
               minLength: 4,
               source: $scope.placeList,
