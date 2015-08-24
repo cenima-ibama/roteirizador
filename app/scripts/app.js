@@ -94,6 +94,15 @@ angular
           return '/river-routes/' + routeParams.authCode + '/' + routeParams.ids;
         }
       })
+      .when('/rail-routes/', {
+        templateUrl: 'views/rail-map.html',
+        controller: 'MainCtrl'
+      })
+      .when('/rail-route/', {
+        redirectTo: function (routeParams) {
+          return '/rail-routes/';
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });
