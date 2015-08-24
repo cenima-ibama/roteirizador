@@ -94,13 +94,13 @@ angular
           return '/river-routes/' + routeParams.authCode + '/' + routeParams.ids;
         }
       })
-      .when('/rail-routes/', {
+      .when('/rail-routes/:authCode', {
         templateUrl: 'views/rail-map.html',
         controller: 'MainCtrl'
       })
-      .when('/rail-route/', {
+      .when('/rail-route/:authCode', {
         redirectTo: function (routeParams) {
-          return '/rail-routes/';
+          return '/rail-routes/' + routeParams.authCode;
         }
       })
       .otherwise({
