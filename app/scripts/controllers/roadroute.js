@@ -11,11 +11,18 @@ angular.module('routesClientApp')
   .controller('RoadRouteCtrl', ['$scope', '$route', '$routeParams', 'RestApi',
     function ($scope, $route, $routeParams, RestApi) {
 
+      $scope.loaddiv = {};
+      $scope.loaddiv.carregar = false;
+
+      var spinner = new Spinner().spin();
+      document.getElementById('load').appendChild(spinner.el);
+
       L.Icon.Default.imagePath = 'images';
       var map = L.map('map').setView([-35, -58], 4);
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);
+
 
       RestApi.getRoute({type:'road-routes', authCode:$routeParams.authCode},
         function success(data) {
@@ -37,6 +44,24 @@ angular.module('routesClientApp')
             routeWhileDragging: true
           });
           $scope.route.addTo(map);
+
+          $($scope.route).on('routingstart', function(){
+            if ($scope.startEnd.length == 2) {
+              $scope.loaddiv.carregar = true;
+              $scope.$apply();
+            }
+          });
+
+          $($scope.route).on('routesfound', function(){
+            $scope.loaddiv.carregar = false;
+            $scope.$apply();
+          });
+
+          $($scope.route).on('routingerror', function(){
+            $scope.loaddiv.carregar = false;
+            console.log("Erro no calculo da rota");
+          });
+
           $scope.message = 'Clique na cidade de origem e de destino para ' +
             'traçar a rota. Em seguida, clique em Gravar para enviar a rota.';
           $scope.class = 'info';
@@ -70,6 +95,7 @@ angular.module('routesClientApp')
           };
 
           $scope.sendRoute = function() {
+            $scope.loaddiv.carregar = true;
             if ($scope.route._routes && $scope.route._routes[0].coordinates) {
               var coordinates = $scope.route._routes[0].coordinates.map(
                 function(coordinate) {
@@ -96,6 +122,7 @@ angular.module('routesClientApp')
                 function success() {
                   $scope.routeExists = true;
                   $scope.class = 'success';
+                  $scope.loaddiv.carregar = false;
                   $route.reload();
                 },
                 function error() {
@@ -103,11 +130,13 @@ angular.module('routesClientApp')
                   $scope.message = 'A rota não está dentro dos estados permitidos. ' +
                     'Trace novamente.';
                   $scope.class = 'danger';
+                  $scope.loaddiv.carregar = false;
                 }
               );
             }
             else {
               $scope.errorMessage = 'Trace uma rota válida';
+              $scope.loaddiv.carregar = false;
               $('#popoverNoRoute').popover('show');
             }
           };

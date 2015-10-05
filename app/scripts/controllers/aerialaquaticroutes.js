@@ -22,6 +22,12 @@ angular.module('routesClientApp')
         $scope.placeTypeName = 'Local';
       }
 
+      $scope.loaddiv = {};
+      $scope.loaddiv.carregar = false;
+
+      var spinner = new Spinner().spin();
+      document.getElementById('load').appendChild(spinner.el);
+      
       L.Icon.Default.imagePath = 'images';
       var map = L.map('map').setView([-35, -58], 4);
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -48,7 +54,7 @@ angular.module('routesClientApp')
           .bindPopup(popupMessage)
           .addTo(map);
         } else {
-          var coordinates = geom.coordinates.map(
+          var coordinates = geom.coordinates[0].map(
             function(coordinate) {
               return coordinate.reverse();
             }
@@ -84,6 +90,7 @@ angular.module('routesClientApp')
       };
 
       $scope.sendRoute = function() {
+        $scope.loaddiv.carregar = true;
         if ($scope.origin && $scope.destination) {
           RestApi.save({type:$scope.routeType},
             {
@@ -94,6 +101,7 @@ angular.module('routesClientApp')
             function success() {
               $scope.routeExists = true;
               $scope.class = 'success';
+              $scope.loaddiv.carregar = false;
               $route.reload();
             },
             function error() {
@@ -102,11 +110,13 @@ angular.module('routesClientApp')
               $scope.errorMessage = 'Não foi possível enviar a rota. ' +
                 'Tente novamente.';
               $('#popoverNoRoute').popover('show');
+              $scope.loaddiv.carregar = false;
             }
           );
         }
         else {
           $scope.errorMessage = 'Trace uma rota válida';
+          $scope.loaddiv.carregar = false;
           $('#popoverNoRoute').popover('show');
         }
       };
@@ -168,6 +178,7 @@ angular.module('routesClientApp')
                  return false;
                }
             });
+
             $('#destination').autocomplete({
               minLength: 4,
               source: $scope.placeList,
